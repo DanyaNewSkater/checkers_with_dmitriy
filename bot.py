@@ -463,7 +463,6 @@ def moves_bot(position, color):
 
 def move_bot(fr, to, area):
     '''Функция, делающая ход бота.'''
-    print()
     if area[fr[0]][fr[1]] == 11 or area[fr[0]][fr[1]] == 22:
         shape = area[fr[0]][fr[1]]
         iFr = fr[0]
@@ -476,7 +475,6 @@ def move_bot(fr, to, area):
     else:
         if abs(fr[0] - to[0]) == 1 and abs(fr[1] - to[1]) == 1:
             shape = area[fr[0]][fr[1]]
-            print(to)
             if shape == 1 and to[0] == 0:
                 shape = 11
             elif shape == 2 and to[0] == 7:
@@ -489,7 +487,6 @@ def move_bot(fr, to, area):
             area[iFr][jFr] = 0
 
         elif abs(fr[0] - to[0]) == 2 and abs(fr[1] - to[1]) == 2:
-            print(to)
             shape = area[fr[0]][fr[1]]
             if shape == 1 and to[0] == 0:
                 shape = 11
@@ -509,7 +506,7 @@ def bot_level_1(area):
     '''Функция бота 1 уровня, делающего обязательные взятия и рандомные ходы.'''
     forLevel1 = []
     ask = take_go(area)
-    print(ask)
+    # print(ask)
 
     if ask == "No":
         matrixArea = moves_bot(area, "black")[0]
@@ -517,12 +514,17 @@ def bot_level_1(area):
             for j in range(len(matrixArea[i])):
                 if matrixArea[i][j] != [] and area[i][j] == 2 or area[i][j] == 22:
                     forLevel1.append([[i, j], matrixArea[i][j]])
-            print(matrixArea[i])
-        hod = random.choice(forLevel1)
-        # print("hod = ",hod)
-        fr1 = hod[0]
-        to1 = random.choice(hod[1])
-        move_bot(fr1, to1, area)
+            # print(matrixArea[i])
+        if forLevel1 == []:
+            for i in range(len(area)):
+                for j in range(len(area[i])):
+                    if area[i][j] == 2 or area[i][j] == 22:
+                        area[i][j] = 0
+        else:
+            hod = random.choice(forLevel1)
+            fr1 = hod[0]
+            to1 = random.choice(hod[1])
+            move_bot(fr1, to1, area)
 
 def take_go(area, iT = "Null", jT = "Null"):
     '''Функция для обязательного взятия.'''
@@ -551,7 +553,7 @@ def take_go(area, iT = "Null", jT = "Null"):
     else:
         for i in range(len(taking)):
             for j in range(len(taking[i])):
-                print(taking[i][j])
+                # print(taking[i][j])
                 if taking[i][j] != [] and (area[i][j] == 1 or area[i][j] == 2):
                     take = taking[i][j][0]
                     iTo = take[0]
@@ -573,7 +575,7 @@ def take_go(area, iT = "Null", jT = "Null"):
 
                 if taking[i][j] != [] and (area[i][j] == 11 or area[i][j] == 22):
                     print("Хочу взять")
-                    count+=1
+                    count += 1
                     isStop = False
                     take = taking[i][j][0]
                     iTo = take[0]
@@ -611,12 +613,6 @@ def take_go(area, iT = "Null", jT = "Null"):
         return "Yes"
     elif not isStop and count != 0:
         # Пытаемся продолжить брать
-        for i in range(len(taking)):
-            for j in range(len(taking[i])):
-                taking[i][j] = []
-        for i in range(len(matrixArea)):
-            for j in range(len(matrixArea[i])):
-                matrixArea[i][j] = []
         take_go(area, iT, jT)
 
 def mark(position, color):

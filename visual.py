@@ -1,4 +1,5 @@
 from global_variables import COORDS
+from modules.bot import moves_bot
 
 
 def checkers_board(canvas):
@@ -233,38 +234,34 @@ def checkers_board(canvas):
 def draw(lst, CANVAS):
     '''Функция, преобразующая матрицу в расстановку шашек на поле'''
     CANVAS.update()
-    w_c = []
-    b_c = []
     for i in range(len(lst)):
         for j in range(len(lst[i])):
             if lst[i][j] == 2:
-                b_c.append(CANVAS.create_oval(COORDS[i][j][0] + 5, COORDS[i][j][1] + 5, COORDS[i][j][2] - 5, COORDS[i][j][3] - 5, outline="yellow", fill="yellow", tags="yellow"))
+                CANVAS.create_oval(COORDS[i][j][0] + 5, COORDS[i][j][1] + 5, COORDS[i][j][2] - 5, COORDS[i][j][3] - 5, outline="yellow", fill="yellow", tags="yellow")
             elif lst[i][j] == 1:
-                ci = CANVAS.create_oval(COORDS[i][j][0] + 5, COORDS[i][j][1] + 5, COORDS[i][j][2] - 5, COORDS[i][j][3] - 5, outline="white", fill="white", tags="white")
-                w_c.append(ci)
+                CANVAS.create_oval(COORDS[i][j][0] + 5, COORDS[i][j][1] + 5, COORDS[i][j][2] - 5, COORDS[i][j][3] - 5, outline="white", fill="white", tags="white")
             elif lst[i][j] == 22:
-                b_c.append(CANVAS.create_oval(COORDS[i][j][0] + 5, COORDS[i][j][1] + 5, COORDS[i][j][2] - 5, COORDS[i][j][3] - 5, outline="red", fill="yellow", tags="yellow"))
+                CANVAS.create_oval(COORDS[i][j][0] + 5, COORDS[i][j][1] + 5, COORDS[i][j][2] - 5, COORDS[i][j][3] - 5, outline="yellow", fill="yellow", tags="yellow")
+                CANVAS.create_oval(COORDS[i][j][0] + 15, COORDS[i][j][1] + 15, COORDS[i][j][2] - 15, COORDS[i][j][3] - 15, outline="white", fill="blue", tags="blue")
             elif lst[i][j] == 11:
-                ci = CANVAS.create_oval(COORDS[i][j][0] + 5, COORDS[i][j][1] + 5, COORDS[i][j][2] - 5,
+                CANVAS.create_oval(COORDS[i][j][0] + 5, COORDS[i][j][1] + 5, COORDS[i][j][2] - 5,
                                         COORDS[i][j][3] - 5, outline="red", fill="white", tags="white")
-                w_c.append(ci)
+                CANVAS.create_oval(COORDS[i][j][0] + 15, COORDS[i][j][1] + 15, COORDS[i][j][2] - 15, COORDS[i][j][3] - 15, outline="blue", fill="blue", tags="blue")
     CANVAS.update()
 
 def draw_reversed(lst, CANVAS):
     '''Функция, аналогичная функции draw, но для случая игры за чёрных'''
-    w_c = []
-    b_c = []
     for i in range(len(lst)):
         for j in range(len(lst[i])):
             if lst[i][j] == 2:
-                b_c.append(CANVAS.create_oval(COORDS[i][j][0] + 5, COORDS[i][j][1] + 5, COORDS[i][j][2] - 5, COORDS[i][j][3] - 5, outline="white", fill="white", tags="white"))
+                CANVAS.create_oval(COORDS[i][j][0] + 5, COORDS[i][j][1] + 5, COORDS[i][j][2] - 5, COORDS[i][j][3] - 5, outline="white", fill="white", tags="white")
             elif lst[i][j] == 1:
-                ci = CANVAS.create_oval(COORDS[i][j][0] + 5, COORDS[i][j][1] + 5, COORDS[i][j][2] - 5, COORDS[i][j][3] - 5, outline="yellow", fill="yellow", tags="yellow")
-                w_c.append(ci)
+                CANVAS.create_oval(COORDS[i][j][0] + 5, COORDS[i][j][1] + 5, COORDS[i][j][2] - 5, COORDS[i][j][3] - 5, outline="yellow", fill="yellow", tags="yellow")
             elif lst[i][j] == 22:
-                b_c.append(CANVAS.create_oval(COORDS[i][j][0] + 5, COORDS[i][j][1] + 5, COORDS[i][j][2] - 5, COORDS[i][j][3] - 5, outline="red", fill="white", tags="white"))
+                CANVAS.create_oval(COORDS[i][j][0] + 5, COORDS[i][j][1] + 5, COORDS[i][j][2] - 5, COORDS[i][j][3] - 5, outline="white", fill="white", tags="white")
+                CANVAS.create_oval(COORDS[i][j][0] + 15, COORDS[i][j][1] + 15, COORDS[i][j][2] - 15, COORDS[i][j][3] - 15, outline="blue", fill="blue", tags="blue")
             elif lst[i][j] == 11:
-                ci = CANVAS.create_oval(COORDS[i][j][0] + 5, COORDS[i][j][1] + 5, COORDS[i][j][2] - 5,
-                                        COORDS[i][j][3] - 5, outline="red", fill="yellow", tags="yellow")
-                w_c.append(ci)
+                CANVAS.create_oval(COORDS[i][j][0] + 5, COORDS[i][j][1] + 5, COORDS[i][j][2] - 5,
+                                        COORDS[i][j][3] - 5, outline="yellow", fill="yellow", tags="yellow")
+                CANVAS.create_oval(COORDS[i][j][0] + 15, COORDS[i][j][1] + 15, COORDS[i][j][2] - 15, COORDS[i][j][3] - 15, outline="blue", fill="blue", tags="blue")
     CANVAS.update()
